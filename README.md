@@ -1,1 +1,1 @@
-# RimiFirebaseRTDBService
+# RimiFirebaseServices
