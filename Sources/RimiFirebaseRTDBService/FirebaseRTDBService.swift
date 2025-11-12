@@ -60,7 +60,7 @@ public final class FirebaseRTDBService<T: Codable & Identifiable>: ObservableObj
         }
     }
 
-    private func databaseReference(_ childPath: String? = nil) throws -> DatabaseReference {
+    private nonisolated func databaseReference(_ childPath: String? = nil) throws -> DatabaseReference {
         guard let uid = Auth.auth().currentUser?.uid else {
             throw RemoteServiceError.noUser
         }
