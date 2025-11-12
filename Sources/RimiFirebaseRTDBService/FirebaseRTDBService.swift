@@ -9,13 +9,6 @@ import Firebase
 import FirebaseAuth
 @preconcurrency import FirebaseDatabase
 import RimiDefinitions
-
-/*
-    THIS IS INTENDED TO WORK WITH FIREBASE REALTIME DATABASE
-    PURPOSE: This service provides CRUD operations for any object in the Firebase Realtime Database.
- */
-
-
 import Combine
 
 enum RemoteServiceError: Error {
@@ -25,6 +18,9 @@ enum RemoteServiceError: Error {
 }
 
 /*
+    THIS IS INTENDED TO WORK WITH FIREBASE REALTIME DATABASE
+    PURPOSE: This service provides CRUD operations for any object in the Firebase Realtime Database.
+ 
     You cannot use a protocol with associatedtypes as a type directly because the compiler needs to know T.
     The compiler will complain:
         - Use of protocol 'FirebaseRTDBRepositoryProtocol' as a type must be written 'any FirebaseRTDBRepositoryProtocol'
