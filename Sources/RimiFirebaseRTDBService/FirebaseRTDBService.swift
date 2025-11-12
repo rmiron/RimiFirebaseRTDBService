@@ -109,9 +109,13 @@ public final class FirebaseRTDBService<T: Codable & Identifiable>: ObservableObj
                     let snapshot = snapshot,
                     let dict = snapshot.value as? [String: Any]
                 {
-                    for (_, value) in dict {
+                    for (key, value) in dict {
                         do {
-                            guard let itemDict = value as? [String: Any] else { continue }
+                            guard var itemDict = value as? [String: Any] else { continue }
+                            
+                            // If your model has an optional `id` property, assign Firebase key
+                            itemDict["id"] = key
+                            
                             let data = try JSONSerialization.data(withJSONObject: itemDict)
                             let item = try self.decoder.decode(T.self, from: data)
                             fetchedItems.append(item)
@@ -153,9 +157,13 @@ public final class FirebaseRTDBService<T: Codable & Identifiable>: ObservableObj
 
                 if let snapshot = snapshot,
                    let dict = snapshot.value as? [String: Any] {
-                    for (_, value) in dict {
+                    for (key, value) in dict {
                         do {
-                            guard let itemDict = value as? [String: Any] else { continue }
+                            guard var itemDict = value as? [String: Any] else { continue }
+                            
+                            // If your model has an optional `id` property, assign Firebase key
+                            itemDict["id"] = key
+                            
                             let data = try JSONSerialization.data(withJSONObject: itemDict)
                             let item = try self.decoder.decode(T.self, from: data)
                             fetchedItems.append(item)
@@ -189,6 +197,9 @@ public final class FirebaseRTDBService<T: Codable & Identifiable>: ObservableObj
                 }
 
                 do {
+                    var itemDict = value
+                    itemDict["id"] = id  // inject Firebase key into the dictionary
+                    
                     let data = try JSONSerialization.data(withJSONObject: value)
                     let item = try self.decoder.decode(T.self, from: data)
                     continuation.resume(returning: item)
