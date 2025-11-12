@@ -39,6 +39,7 @@ Task {
     try await repository.createItem(SportsCard(id: "123", player: "LeBron James", year: 2003, set: "Topps Chrome"))
     let allCards = try await repository.readAll()
 }
+```
 
 ## FirebaseRTDBUserService
 
